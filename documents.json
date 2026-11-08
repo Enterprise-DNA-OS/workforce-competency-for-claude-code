@@ -1,11 +1,37 @@
 [
   {
-    "name": "example",
-    "title": "TODO(author): the first document this industry must produce",
-    "for_each": "select gen_random_uuid() as id, 'Example' as name",
-    "file": "name",
+    "name": "competency-record",
+    "title": "Worker competency record",
+    "for_each": "select id,code from employees where active order by code",
+    "file": "code",
     "sections": [
-      { "title": "Details", "sql": "select 'replace me' as item, $1::text as record_id" }
+      {
+        "title": "Employee",
+        "layout": "record",
+        "sql": "select code,name,site from employees where id=$1"
+      },
+      {
+        "title": "Role requirements",
+        "sql": "select role,skill,minimum_level,level,readiness,expires_on from competency_matrix where employee_id=$1 order by role,skill",
+        "note": "A record check is not authorisation to work."
+      },
+      {
+        "title": "Assessment history",
+        "sql": "select code,level,assessed_on,expires_on,assessor,evidence,status,review_note from results where employee_id=$1 order by assessed_on"
+      }
+    ]
+  },
+  {
+    "name": "training-follow-up",
+    "title": "Training follow-up working draft",
+    "for_each": "select id,code from employees where active order by code",
+    "file": "code",
+    "sections": [
+      {
+        "title": "Training actions",
+        "sql": "select t.code,s.name skill,t.owner,t.due_on,t.status,t.evidence from training t join skills s on s.id=t.skill_id where employee_id=$1 order by due_on",
+        "note": "Course completion does not approve a competency assessment."
+      }
     ]
   }
 ]

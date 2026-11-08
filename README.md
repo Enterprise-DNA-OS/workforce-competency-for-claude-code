@@ -1,115 +1,87 @@
-<h1 align="center">Workforce Competency for Claude Code</h1>
+# Workforce Competency for Claude Code
 
-<p align="center">
-  <strong>The open-source workforce competency register that is just a database and Claude Code.</strong>
-</p>
+Know which skills are current, which assessments need review and where the next expiry leaves a team short. Keep your role requirements, assessment history and training follow-up in a database you own.
 
-<p align="center">
-  Created by <a href="https://www.enterprisedna.co"><strong>Enterprise DNA</strong></a>. Free and open source. Works with Claude Code, Codex, OpenCode or Cursor.
-</p>
+| Do it yourself | We customise it | We run it for you |
+|---|---|---|
+| Free, MIT. Install and run the demo. | Your roles, rating scale, import mapping and shared screens. | Installed and operated through Omni by Enterprise DNA. One setup fee, then a retainer. |
 
-<!-- three-doors -->
-<table align="center">
-  <tr>
-    <td align="center"><strong>Do it yourself</strong><br/>Clone it, run it, own it. Free, MIT.<br/><a href="#quick-start">Quick start</a></td>
-    <td align="center"><strong>We customise it</strong><br/>Your fields, your rules, your AG5 data brought across.<br/><a href="https://enterprisedna.co/omni/book/?utm_source=github&utm_medium=readme&utm_campaign=ag5">Book a call</a></td>
-    <td align="center"><strong>We run it for you</strong><br/>Installed, connected and operated inside Omni. Setup fee, then a retainer.<br/><a href="https://enterprisedna.co/omni/instead-of/ag5?utm_source=github&utm_medium=readme&utm_campaign=ag5">How it works</a></td>
-  </tr>
-</table>
+[Get your version built](https://enterprisedna.co/omni/book/?offer=replace-software&utm_source=github&utm_medium=readme&utm_campaign=ag5) · [Instead of AG5](https://enterprisedna.co/omni/instead-of/ag5)
 
-<p align="center">
-  <a href="#what-is-this">What is this</a> &bull;
-  <a href="#why-no-front-end">Why no front end</a> &bull;
-  <a href="#quick-start">Quick start</a> &bull;
-  <a href="#the-commands">Commands</a> &bull;
-  <a href="#instead-of-ag5">Instead of AG5</a> &bull;
-  <a href="#want-it-installed-and-run-for-you">Installed for you</a> &bull;
-  <a href="#license">License</a>
-</p>
+## Start with the Monday review
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Node-20+-339933?style=flat-square" alt="Node 20+" />
-  <img src="https://img.shields.io/badge/PostgreSQL-any-336791?style=flat-square" alt="PostgreSQL" />
-  <img src="https://img.shields.io/badge/PGlite-embedded-3ecf8e?style=flat-square" alt="PGlite" />
-  <img src="https://img.shields.io/badge/License-MIT-yellow?style=flat-square" alt="MIT License" />
-</p>
-
----
-
-## What is this
-
-Workforce Competency for Claude Code does the job you pay AG5 for, as a Postgres database and a set of agent commands. There is no web front end. You open the folder in [Claude Code](https://claude.com/claude-code) (or Codex, OpenCode, Cursor: see `AGENTS.md`) and ask for what you want in plain language. It runs the right query, and it can answer questions the AG5 dashboard cannot.
-
-<!-- TODO(author): the annual bill. One sentence: what a 10 to 50 person business typically pays AG5 per year, all in, with a source. -->
-
-Want the same thing with a web front end, or built on a different stack? That is a customisation, and it is exactly what Enterprise DNA does: [book a call](https://enterprisedna.co/omni/book/?utm_source=github&utm_medium=readme&utm_campaign=ag5).
-
-<!-- TODO(author): two or three sentences on what this specific product covers and who it is for. -->
-
-## Why no front end
-
-- The front end was only ever there because the database was hard to talk to. That is no longer true.
-- Your data sits in plain Postgres tables you own. Any tool can read them. No export, no lock-in.
-- No seats, no tiers, no add-ons. Read [docs/why-no-front-end.md](docs/why-no-front-end.md) for the honest trade-offs too.
-
-## Quick start
-
-Sixty seconds, no database install (an embedded Postgres runs inside Node):
+Requires Node 20 or later.
 
 ```bash
-git clone https://github.com/Enterprise-DNA-OS/workforce-competency-for-claude-code.git
-cd workforce-competency-for-claude-code
 npm install
 npm run demo
+npm run competency -- weekly-review
+npm run docs
+npm run view
 ```
 
-Then open the folder in Claude Code and type a slash command. <!-- TODO(author): name the first command to try. -->
+Open this folder in Claude Code, Codex, OpenCode or Cursor. AGENTS.md points every runtime at the same instructions and commands. PGlite runs locally; DATABASE_URL selects PostgreSQL. Seed only a disposable demo database.
 
-### Use it with your own Postgres or Supabase
+The fictional packing business has two sites, four employees, three skills and deliberately expired, pending, below-level and missing evidence records. Nothing in the demo authorises anyone to operate equipment.
 
-Copy `.env.example` to `.env`, set `DATABASE_URL`, then `npm run migrate`. Same commands, shared data, no per-seat fee.
+## Weekly rituals
 
-## The commands
+/skills-gap checks role requirements. /renewals-due reviews expiry. /single-cover finds teams below their cover target. /approval-queue prepares the assessor review. /training-plan follows up open training. /weekly-review combines coverage, attention and training.
 
-<!-- TODO(author): a table of the slash commands in .claude/commands and what each one does. -->
+The latest assessment on or before today controls readiness. A pending, revoked or expired latest assessment never falls back to an older pass. Training completion records attendance evidence; it does not approve competence. Coverage counts distinct active employees and respects assignment dates. The thirty-day projection holds today's assignments fixed and only ages current assessment expiry; it is not a staffing forecast.
 
-| Command | What it does |
-|---|---|
-| `/...` | ... |
+30 CLI commands are documented in [operations](docs/operations.md).
 
-## Instead of AG5
+## Ten questions you can answer today
 
-<!-- TODO(author): how to bring data across from AG5; link docs/replace-ag5.md -->
+These are demonstrated questions for this system. No claim is made that AG5 cannot answer them.
 
-## Architecture
+1. Which required skills have no assessment? Run `skills-gap`.
+2. Which certificates have expired or expire within sixty days? Run `renewals-due`.
+3. Which site depends on one currently qualified person? Run `single-cover`.
+4. Where will coverage fall below our target in thirty days? Run `coverage`.
+5. Which newer assessments are still waiting for review? Run `approval-queue`.
+6. Which approved records lack supporting evidence? Run `compliance`.
+7. Which training owner has the most overdue actions? Run `owner-load`.
+8. Who has a recorded level below the role requirement? Run `skills-gap`.
+9. Who approved or revoked an assessment and when? Run `activity`.
+10. What source rows were brought across from the export? Run `import-history`.
 
+## Bring your records
+
+```bash
+npm run competency -- import ag5 --manifest=fixtures/ag5/manifest.json --source=demo-export --actor="Your name" --dry-run
 ```
-workforce-competency-for-claude-code/
-  CLAUDE.md                 how the operator wants this run (routing table + house rules)
-  AGENTS.md                 the same, for Codex / OpenCode / Cursor / Gemini CLI
-  .claude/commands/         the slash commands
-  scripts/                  the CLI the commands drive
-  scripts/lib/db.mjs        one adapter: DATABASE_URL (pg) or embedded PGlite
-  supabase/migrations/      plain SQL schema
-  supabase/seed.sql         demo data
-  docs/                     the thesis and the migration guide
-```
 
-## Built for coding agents
+The fixture is fictional. AG5 documents custom Excel exports and CSV for large exports, not a fixed universal set of headings. Map your actual files in one manifest, then run one import for the batch. The importer preserves original columns, reconciles unchanged repeats and rolls back the batch on errors or changed duplicates. Imported reference codes must be unique in this database. See the [switching guide](docs/replace-ag5.md).
 
-The database, CLI and command recipes work with Claude Code, Codex, OpenCode or Cursor. Ask your coding agent for a new command and have it implement and test the change against the same records.
+## Documents and views
 
-## Contributing
+Edit brand.json for your name, logo and colours. npm run docs produces worker competency records and training follow-up working drafts. npm run view produces the weekly review, competency matrix and training snapshots. The draft commands write private HTML and send nothing.
 
-Issues and pull requests are welcome. Keep the shape: plain SQL, a small CLI, a slash command per recurring job, no front end.
+/compliance checks record evidence against the sources in [compliance.md](docs/compliance.md). It does not certify competence or legal compliance. A supervisor still assesses the work, its hazards and the person. This base does not provide learning courses, phone workflows, SSO, electronic signatures or validated FDA controls. [Why no front end](docs/why-no-front-end.md).
 
-## Want it installed and run for you?
+## Your first hour: ten things to ask for
 
-Enterprise DNA installs Workforce Competency for Claude Code for your business, migrates your AG5 data, connects it to the rest of your tools, and runs it for you as part of **Omni**, our managed Command Center. One setup fee, then a monthly retainer.
+1. Put our business name on the training plans.
+2. Show the missing assessments for packing operators.
+3. Show the expired evidence separately from pending review.
+4. Explain why the machine isolation cover drops next month.
+5. Draft a training follow-up for the supervisor.
+6. Test our export mapping without saving records.
+7. Add our roles and their minimum levels.
+8. Assign training follow-up to the responsible owner.
+9. Add a read-only view grouped by site.
+10. Add a training provider reference with a tested migration.
 
-- Book a call: [enterprisedna.co/omni/book](https://enterprisedna.co/omni/book/?offer=replace-software&utm_source=github&utm_medium=readme&utm_campaign=ag5)
-- Read more: [enterprisedna.co/omni/instead-of/ag5](https://enterprisedna.co/omni/instead-of/ag5?utm_source=github&utm_medium=readme&utm_campaign=ag5)
+/customise writes and tests a numbered migration. /new-view adds a read-only report. Start every answer with current database records.
 
-## License
+## Verification and selection evidence
 
-MIT. Copyright (c) 2026 Enterprise DNA.
+npm test covers every CLI command, migration and seed idempotence, assessment precedence, expiry boundaries, coverage, input validation, approval gates, audit history, CSV/XLSX import, rollback, repeat imports, exports and escaped HTML. Windows/Linux verification is configured in the manual CI workflow. See [operations](docs/operations.md).
+
+AG5 currently quotes privately. The selection used a third-party five-figure annualised listing, not a verified customer invoice or a current vendor price. No current NZ/AU bill or savings claim is made. [Research and six scores](docs/research.md).
+
+Enterprise DNA maps your records, builds your workflows and runs your version through Omni by Enterprise DNA. One setup fee, then a retainer. [Book 30 minutes with Sam](https://enterprisedna.co/omni/book/?offer=replace-software&utm_source=github&utm_medium=readme&utm_campaign=ag5).
+
+MIT. Not affiliated with AG5 or Anthropic. Hosting and agent usage have their own costs.

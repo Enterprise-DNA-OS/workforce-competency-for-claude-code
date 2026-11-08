@@ -1,0 +1,64 @@
+{
+  "files": [
+    {
+      "kind": "employees",
+      "file": "employees.csv",
+      "map": {
+        "code": "Employee ID",
+        "name": "Full name",
+        "site": "Location"
+      }
+    },
+    {
+      "kind": "roles",
+      "file": "roles.csv",
+      "map": {
+        "code": "Role ID",
+        "name": "Role name"
+      }
+    },
+    {
+      "kind": "skills",
+      "file": "skills.csv",
+      "map": {
+        "code": "Skill ID",
+        "name": "Skill name"
+      }
+    },
+    {
+      "kind": "requirements",
+      "file": "requirements.csv",
+      "map": {
+        "code": "Requirement ID",
+        "role": "Role ID",
+        "skill": "Skill ID",
+        "minimum_level": "Required level"
+      }
+    },
+    {
+      "kind": "assignments",
+      "file": "assignments.csv",
+      "map": {
+        "code": "Assignment ID",
+        "employee": "Employee ID",
+        "role": "Role ID",
+        "starts_on": "Start date"
+      }
+    },
+    {
+      "kind": "results",
+      "file": "results.csv",
+      "map": {
+        "code": "Result ID",
+        "employee": "Employee ID",
+        "skill": "Skill ID",
+        "level": "Level",
+        "assessed_on": "Assessment date",
+        "expires_on": "Expiry date",
+        "assessor": "Assessor",
+        "evidence": "Evidence",
+        "status": "State"
+      }
+    }
+  ]
+}

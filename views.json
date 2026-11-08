@@ -1,13 +1,38 @@
 [
   {
     "name": "week",
-    "title": "This week",
-    "subtitle": "Workforce Competency for Claude Code: what needs attention, rendered by npm run view",
+    "title": "Weekly workforce review",
+    "subtitle": "Record evidence only. Supervisor review required before assigning work.",
     "sections": [
       {
-        "title": "Needs attention",
-        "note": "TODO(author): point this at the industry's attention view (overdue, stuck, quiet).",
-        "sql": "select 'replace me' as item, 'TODO(author)' as why"
+        "title": "Coverage",
+        "sql": "select * from coverage order by site,role,skill"
+      },
+      {
+        "title": "Attention",
+        "sql": "select * from attention order by code,skill"
+      }
+    ]
+  },
+  {
+    "name": "competency",
+    "title": "Competency matrix",
+    "subtitle": "Record evidence only. Supervisor review required before assigning work.",
+    "sections": [
+      {
+        "title": "Required skills",
+        "sql": "select employee_code,employee,site,role,skill,minimum_level,level,readiness,expires_on from competency_matrix order by employee_code,skill"
+      }
+    ]
+  },
+  {
+    "name": "training",
+    "title": "Training follow-up",
+    "subtitle": "Record evidence only. Supervisor review required before assigning work.",
+    "sections": [
+      {
+        "title": "Open training",
+        "sql": "select code,employee,skill,owner,due_on from training_due order by due_on"
       }
     ]
   }
