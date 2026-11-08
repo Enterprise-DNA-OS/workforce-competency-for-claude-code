@@ -6,7 +6,7 @@ Know which skills are current, which assessments need review and where the next 
 |---|---|---|
 | Free, MIT. Install and run the demo. | Your roles, rating scale, import mapping and shared screens. | Installed and operated through Omni by Enterprise DNA. One setup fee, then a retainer. |
 
-[Get your version built](https://enterprisedna.co/omni/book/?offer=replace-software&utm_source=github&utm_medium=readme&utm_campaign=ag5) · [Instead of AG5](https://enterprisedna.co/omni/instead-of/ag5)
+[Get your version built](https://enterprisedna.co/omni/book/?offer=replace-software&utm_source=github&utm_medium=readme&utm_campaign=ag5) · [Instead of AG5](https://enterprisedna.co/omni/instead-of/ag5?utm_source=github&utm_medium=readme&utm_campaign=ag5)
 
 ## Start with the Monday review
 
